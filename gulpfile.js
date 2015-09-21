@@ -19,15 +19,7 @@ gulp.task('styles', function () {
         .pipe($.size());
 });
 
-// Copy directly the core files for right now
-// 
-// FUTURE: use a bower/npm module instead
-gulp.task('core', function () {
-    return gulp.src('/Users/reed/pop/pretzel_games/programming_game/core/**/*.js', { dot: true })
-        .pipe(gulp.dest('app/scripts/core'));
-});
-
-gulp.task('html', ['styles', 'core', 'webpack-shell-production'], function () {
+gulp.task('html', ['styles', 'webpack-shell-production'], function () {
     var jsFilter = $.filter('app/scripts/**/*.js');
     var cssFilter = $.filter('app/styles/**/*.css');
 
@@ -51,14 +43,6 @@ gulp.task('images', function () {
         .pipe($.size());
 });
 
-gulp.task('fonts', function () {
-    return $.bowerFiles()
-        .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
-        .pipe($.flatten())
-        .pipe(gulp.dest('dist/fonts'))
-        .pipe($.size());
-});
-
 gulp.task('extras', function () {
     return gulp.src(['app/*.*', '!app/*.html'], { dot: true })
         .pipe(gulp.dest('dist'));
@@ -68,7 +52,7 @@ gulp.task('clean', function () {
     return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'extras']);
+gulp.task('build', ['html', 'images', 'extras']);
 
 gulp.task('default', ['clean'], function () {
     gulp.start('build');
@@ -89,7 +73,7 @@ gulp.task('connect', function () {
         });
 });
 
-gulp.task('serve', ['connect', 'styles', 'core', 'webpack-shell-dev'], function () {
+gulp.task('serve', ['connect', 'styles', 'webpack-shell-dev'], function () {
     require('opn')('http://localhost:9000');
 });
 
@@ -98,16 +82,11 @@ gulp.task('wiredep', function () {
     var wiredep = require('wiredep').stream;
 
     gulp.src('app/styles/*.scss')
-        .pipe(wiredep({
-            directory: 'app/bower_components'
-        }))
+        .pipe(wiredep({}))
         .pipe(gulp.dest('app/styles'));
 
     gulp.src('app/*.html')
-        .pipe(wiredep({
-            directory: 'app/bower_components',
-            exclude: ['bootstrap-sass-official']
-        }))
+        .pipe(wiredep({}))
         .pipe(gulp.dest('app'));
 });
 
@@ -126,9 +105,8 @@ gulp.task('watch', ['connect', 'serve'], function () {
     });
 
     gulp.watch('app/styles/**/*.scss', ['styles']);
-    gulp.watch(['app/scripts/**/*.js', '!app/scripts/bundle/**/*.js'], ['core', 'webpack-shell-dev']);
+    gulp.watch(['app/scripts/**/*.js', '!app/scripts/bundle/**/*.js'], ['webpack-shell-dev']);
     gulp.watch('app/images/**/*', ['images']);
-    gulp.watch('bower.json', ['wiredep']);
 });
 
 gulp.task('webpack-shell-dev', shell.task([

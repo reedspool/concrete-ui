@@ -1,24 +1,21 @@
 {
-  "name": "browser",
+  "name": "concrete-ui",
   "version": "0.0.0",
   "dependencies": {
+    "bacon.jquery": "^0.4.12",
     "baconjs": "^0.7.53",
-    "gulp": "^3.8.11",
-    "gulp-util": "^3.0.4",
-    "gulp-webpack": "^1.4.0",
-    "gulp-webpack-build": "^0.11.0",
+    "bootstrap-sass": "^3.3.5",
+    "concrete-runtime": "https://github.com/codeempathy/concrete-runtime",
     "immutable": "^3.7.3",
+    "jquery": "^2.1.4",
     "lodash": "^3.6.0",
-    "node-libs-browser": "^0.5.2",
-    "webpack": "^1.9.10",
-    "webpack-dev-server": "^1.9.0"
+    "modernizr": "^3.0.0"
   },
   "devDependencies": {
     "connect": "^2.14.4",
     "connect-livereload": "^0.4.0",
-    "gulp": "^3.6.0",
+    "gulp": "^3.8.11",
     "gulp-autoprefixer": "^0.0.7",
-    "gulp-bower-files": "^0.2.1",
     "gulp-cache": "^0.1.1",
     "gulp-clean": "^0.2.4",
     "gulp-csso": "^0.2.6",
@@ -32,9 +29,15 @@
     "gulp-shell": "^0.4.1",
     "gulp-size": "^0.3.0",
     "gulp-uglify": "^0.2.1",
+    "gulp-util": "^3.0.4",
     "gulp-useref": "^0.4.2",
+    "gulp-webpack": "^1.4.0",
+    "gulp-webpack-build": "^0.11.0",
     "jshint-stylish": "^0.2.0",
+    "node-libs-browser": "^0.5.2",
     "opn": "^0.1.1",
+    "webpack": "^1.9.10",
+    "webpack-dev-server": "^1.9.0",
     "wiredep": "^1.4.3"
   },
   "engines": {
