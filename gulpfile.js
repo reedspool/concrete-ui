@@ -107,6 +107,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
     gulp.watch('app/styles/**/*.scss', ['styles']);
     gulp.watch(['app/scripts/**/*.js', '!app/scripts/bundle/**/*.js'], ['webpack-shell-dev']);
     gulp.watch('app/images/**/*', ['images']);
+    gulp.watch('package.json', ['webpack-shell-dev']);
 });
 
 gulp.task('webpack-shell-dev', shell.task([

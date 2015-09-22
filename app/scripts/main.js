@@ -1,14 +1,19 @@
-var Universe = require('./core/Universe.js'),
-    Tape = require('./core/Tape.js'),
-    Block = require('./core/Block.js'),
-    util = require('./util.js'),
-    BaconUniverse = require('./core/BaconUniverse.js');
+var Bacon = require('baconjs'),
+    $ = require('jquery'),
+    bjq = require('bacon.jquery'),
+    concrete = require('concrete-runtime'),
+    Universe = concrete.Universe,
+    Tape = concrete.Tape,
+    Block = concrete.Block,
+    BaconUniverse = concrete.BaconUniverse;
+
+//require('script!modernizr');
 
 Bacon.Observable.prototype.dynamicInterval = function(intervalObs) {
   var self = this
   return new Bacon.EventStream(function(sink) {
     var interval = 0
-    
+
     intervalObs.onValue(function(n) {
       interval = n
     });
@@ -18,7 +23,7 @@ Bacon.Observable.prototype.dynamicInterval = function(intervalObs) {
     }).onValue(function(x) {
       sink(new Bacon.Next(x))
     })
-    
+
     return function() { }
   })
 }
@@ -38,11 +43,11 @@ var runButtonStream = $runButton.asEventStream('click');
 
 function textAreaProperty(initValue) {
   var getValue;
-  
+
   getValue = function() {
     return $input.val() || $input.html();
   };
-  
+
   if (initValue !== null) {
     $input.html(initValue);
   }
@@ -70,10 +75,10 @@ function htmlOutput(universe) {
 
   return tape.get('blocks')
     .map(function (block) { return Block.toString(block) })
-    .map(function (block, i) { return handlePositions[i] 
-                                      ? block + '#' + handlePositions[i] 
+    .map(function (block, i) { return handlePositions[i]
+                                      ? block + '#' + handlePositions[i]
                                       : block; })
-    .map(function (block, i) { 
+    .map(function (block, i) {
       var className = 'block';
 
       if (i == offset) className += ' daemon';
@@ -87,7 +92,7 @@ function htmlOutput(universe) {
     .join(' ')
 }
 
-function getSliderValue() { 
+function getSliderValue() {
   return translateSliderValue($slider.val())
 }
 
@@ -115,7 +120,7 @@ textAreaProperty()
 
   // Run universe
   .flatMapLatest(function (universe) {
-    
+
     interval = getSliderValue();
 
     return BaconUniverse.asStream(universe)
