@@ -77,19 +77,6 @@ gulp.task('serve', ['connect', 'styles', 'webpack-shell-dev'], function () {
     require('opn')('http://localhost:9000');
 });
 
-// inject bower components
-gulp.task('wiredep', function () {
-    var wiredep = require('wiredep').stream;
-
-    gulp.src('app/styles/*.scss')
-        .pipe(wiredep({}))
-        .pipe(gulp.dest('app/styles'));
-
-    gulp.src('app/*.html')
-        .pipe(wiredep({}))
-        .pipe(gulp.dest('app'));
-});
-
 gulp.task('watch', ['connect', 'serve'], function () {
     var server = $.livereload();
 
