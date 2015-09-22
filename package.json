@@ -6,6 +6,7 @@
     "bacon.model": "^0.1.12",
     "baconjs": "^0.7.53",
     "concrete-runtime": "https://github.com/codeempathy/concrete-runtime",
+    "bootstrap-sass": "^3.3.5",
     "immutable": "^3.7.3",
     "jquery": "^2.1.4",
     "lodash": "^3.6.0"
