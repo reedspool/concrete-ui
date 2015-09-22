@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <!-- Copied from https://raw.githubusercontent.com/jaelle/blockly-page-editor/gh-pages/blockly.html -->
+    <meta charset="utf-8">
+
+    <!-- build:js scripts/vendor_blockly_editor_widget.js -->
+      <script src="node_modules/blockly-src/blockly_compressed.js"></script>
+      <script src="node_modules/blockly-src/blocks_compressed.js"></script>
+      <script src="node_modules/blockly-src/msg/js/en.js"></script>
+      <script src="node_modules/blockly-src/javascript_compressed.js"></script>
+      <script src="scripts/concrete_blockly/javascript.js"></script>
+      <script src="scripts/concrete_blockly/blocks.js"></script>
+    <!-- endbuild -->
+
+    <style>
+      html, body {
+        background-color: #fff;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%;
+      }
+      .blocklySvg {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <script>
+      function init() {
+        Blockly.inject(document.body, {toolbox: document.getElementById('toolbox')});
+
+        // Let the top-level application know that Blockly is ready.
+        var interval = setInterval(function () {
+          if (window.parent.blockly_loaded) {
+            clearInterval(interval);
+            
+            window.parent.blockly_loaded(Blockly);
+
+            var rootBlock = Blockly.Block.obtain(Blockly.mainWorkspace, 'concrete_block_blank');
+            rootBlock.initSvg();
+            rootBlock.render();
+            rootBlock.setMovable(false);
+            rootBlock.setDeletable(false);
+          }
+        }, 60)
+       
+       
+
+      }
+    </script>
+  </head>
+  <body onload="init()">
+    <xml id="toolbox" style="display: none">
+    <category name="Numbers">
+      <block type="concrete_block_number_0"></block>
+      <block type="concrete_block_number_1"></block>
+      <block type="concrete_block_number_2"></block>
+      <block type="concrete_block_number_3"></block>
+      <block type="concrete_block_number_4"></block>
+      <block type="concrete_block_number_5"></block>
+      <block type="concrete_block_number_6"></block>
+      <block type="concrete_block_number_7"></block>
+      <block type="concrete_block_number_8"></block>
+      <block type="concrete_block_number_9"></block>
+      <block type="concrete_block_number_10"></block>
+      <block type="concrete_block_number_PI"></block>
+    </category>
+    <category name="Math">
+      <block type="concrete_block_op_sum"></block>
+      <block type="concrete_block_op_difference"></block>
+      <block type="concrete_block_op_product"></block>
+      <block type="concrete_block_op_division"></block>
+    </category>
+    <category name="Control">
+      <block type="concrete_block_blank"></block>
+      <block type="concrete_block_op_greater_than"></block>
+      <block type="concrete_block_op_less_than"></block>
+      <block type="concrete_block_op_conditional"></block>
+      <block type="concrete_block_op_jump"></block>
+      <block type="concrete_block_op_copy"></block>
+      <block type="concrete_block_op_call"></block>
+    </category>
+  </xml>
+  </body>
+</html>

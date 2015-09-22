@@ -5,9 +5,8 @@ var Bacon = require('baconjs'),
     Universe = concrete.Universe,
     Tape = concrete.Tape,
     Block = concrete.Block,
-    BaconUniverse = concrete.BaconUniverse;
-
-//require('script!modernizr');
+    BaconUniverse = concrete.BaconUniverse,
+    ConcreteBlockly = require('./ConcreteBlockly.js');
 
 Bacon.Observable.prototype.dynamicInterval = function(intervalObs) {
   var self = this
@@ -32,6 +31,8 @@ var $input = $('#Concrete-input');
 var $output = $('#Concrete-output');
 var $runButton = $('#Concrete-runButton');
 var $slider = $('#Concrete-speed-slider');
+var $runBlocklyCode = $('#runBlocklyCode');
+var $seeBlocklyCode = $('#seeBlocklyCode');
 
 var interval = getSliderValue();
 var runTimeBus = new Bacon.Bus();
@@ -41,6 +42,8 @@ var inputKeyupStream = $input.asEventStream("keyup input");
 var speedChangeStream = $slider.asEventStream('change');
 var runButtonStream = $runButton.asEventStream('click');
 
+var runBlocklyCodeStream = $runBlocklyCode.asEventStream('click');
+var viewBlockyCodeStream = $seeBlocklyCode.asEventStream('click')
 function textAreaProperty(initValue) {
   var getValue;
 
@@ -59,6 +62,9 @@ function textAreaProperty(initValue) {
             .skipDuplicates()
             .debounce(500);
 }
+
+var blocklyUpdateStream = ConcreteBlockly.asEventStream();
+blocklyUpdateStream.log();
 
 function htmlOutput(universe) {
   var tape = universe.get('tape');
@@ -104,15 +110,23 @@ function triggerRunning() {
   runTimeBus.push({});
 }
 
+runBlocklyCodeStream
+  .onValue(ConcreteBlockly.run)
+
+viewBlockyCodeStream
+  .onValue(ConcreteBlockly.see)
+
 speedChangeStream
   .merge(runButtonStream)
   .merge(inputKeyupStream)
   .merge(inputCutAndPasteStream)
+  // .merge(blocklyUpdateStream)
   .onValue(triggerRunning);
 
 // Read from input
 textAreaProperty()
   .toEventStream()
+  .merge(blocklyUpdateStream)
   .sampledBy(runTimeBus)
 
   // Parse universe

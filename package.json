@@ -5,8 +5,9 @@
     "bacon.jquery": "^0.4.12",
     "bacon.model": "^0.1.12",
     "baconjs": "^0.7.53",
-    "concrete-runtime": "https://github.com/codeempathy/concrete-runtime",
+    "blockly-src": "git+https://github.com/google/blockly.git",
     "bootstrap-sass": "^3.3.5",
+    "concrete-runtime": "git+https://github.com/codeempathy/concrete-runtime.git",
     "immutable": "^3.7.3",
     "jquery": "^2.1.4",
     "lodash": "^3.6.0"

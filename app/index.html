@@ -21,6 +21,18 @@
                                 <h1>Concrete Interpreter</h1>
                                 
                                 <p>Interpreter for the Concrete Programming Language.</p>
+
+                                <h5>Testing Blockly</h5>
+
+                                <div id="blockly_editor">
+                                    <!-- Blockly will be injected in the iframe below //-->
+                                    <iframe id="blockly" src="blockly_editor_widget.html" width="100%"></iframe>
+                                </div>
+
+                                <p>
+                                    <button id="runBlocklyCode">Run Blockly Code</button> or 
+                                    <button id="seeBlocklyCode">See Blockly Code</button>
+                                </p>
                     
                                 <label for="Concrete-input">Input</label><br>
                                 <textarea id="Concrete-input" name="" id="" cols="30" rows="5">1#A 1#B + _#C @C @A move @A jump</textarea><br>
