@@ -12,36 +12,27 @@
         <!-- endbuild -->
     </head>
     <body>
-        <div class="container-fluid">
-            <div class="col-xs-12">
-                <div class="row">
-                    <div class="container">
-                        <div class="col-xs-8 col-xs-offset-2">
-                            <div class="row">
-                                <h1>Concrete Interpreter</h1>
-                                
-                                <p>Interpreter for the Concrete Programming Language.</p>
-                    
-                                <label for="Concrete-input">Input</label><br>
-                                <textarea id="Concrete-input" name="" id="" cols="30" rows="5">1#A 1#B + _#C @C @A move @A jump</textarea><br>
-                                
-                                <label for="Concrete-speed-slider">Speed (0.5-100 operations per second)</label>
-                                <input id="Concrete-speed-slider" type="range" min="-200" max="-10" val="-100" >
-                                
-                                <button id="Concrete-runButton">Run</button><br>
+       <article>
+            <h1>Concrete Interpreter</h1>
+            
+            <p>Interpreter for the Concrete Programming Language.</p>
 
-                                <label for="Concrete-output">Output</label><br>
-                                <div id="Concrete-output" name="" id="" cols="30" rows="10">
-                                        
-                                </div>
+            <label for="Concrete-input">Input</label>
+            <textarea id="Concrete-input" name="" id="" cols="30" rows="5">*C#A 1 + 0#C @A jump</textarea>
+            
+            <label for="Concrete-speed-slider">Speed (0.5-100 operations per second)</label>
+            <input id="Concrete-speed-slider" type="range" min="-200" max="-10" val="-100" >
+            
+            <button id="Concrete-runButton">Run</button>
 
-                                <p>For more info, see <a href="https://github.com/codeempathy/concrete-runtime">the README on GitHub</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <label for="Concrete-log">Output</label>
+            <div id="Concrete-log" name="" id="" cols="30" rows="10"></div>
+
+            <label for="Concrete-output">Program Execution In Progress</label>
+            <div id="Concrete-output" name="" id="" cols="30" rows="10"></div>
+
+            <p>For more info, see <a href="https://github.com/codeempathy/concrete-runtime">the README on GitHub</a></p>
+        </article>
 
         <!-- build:js scripts/bundle.js -->
         <script src="scripts/bundle/bundle.js"></script>

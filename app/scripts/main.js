@@ -30,6 +30,7 @@ Bacon.Observable.prototype.dynamicInterval = function(intervalObs) {
 
 var $input = $('#Concrete-input');
 var $output = $('#Concrete-output');
+var $log = $('#Concrete-log');
 var $runButton = $('#Concrete-runButton');
 var $slider = $('#Concrete-speed-slider');
 
@@ -58,6 +59,12 @@ function textAreaProperty(initValue) {
             .toProperty(getValue())
             .skipDuplicates()
             .debounce(500);
+}
+
+function htmlLog(universe) {
+  var log = universe.get('extras').get('log').toJS();
+
+  return '<div>' + log.join('</div><div>') + '</div>';
 }
 
 function htmlOutput(universe) {
@@ -111,7 +118,7 @@ speedChangeStream
   .onValue(triggerRunning);
 
 // Read from input
-textAreaProperty()
+var universeStream = textAreaProperty()
   .toEventStream()
   .sampledBy(runTimeBus)
 
@@ -132,8 +139,13 @@ textAreaProperty()
 
       // .dynamicInterval(speedChangeStream.map(getSliderValue))
 
-  })
-  .map(htmlOutput)
+  });
+
+universeStream.map(Universe.createLogIfNone)
+  .map(htmlLog)
+  .onValue($log.html.bind($log))
+
+universeStream.map(htmlOutput)
   .onValue($output.html.bind($output))
 
 // Trigger on App ready

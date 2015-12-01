@@ -2,6 +2,22 @@ body {
     background-color: rgb(244, 255, 236);
 }
 
+article {
+    margin: 0 auto;
+    width: 70%;
+
+    label {
+        margin-bottom: 20px;
+        margin-top: 40px;
+        display: block;
+        font-size: 1.2em;
+        color: rgba(68, 68, 68, 0.87);
+        font-weight: bold;
+    }
+
+
+}
+
 #Concrete-output {
     .block {
         display: inline-block;
@@ -10,6 +26,8 @@ body {
         padding: 5px;
         text-align: center;
         background-color: #DAF2FF;
+        margin-right: 10px;
+        margin-bottom: 10px;
 
         &.daemon {
             font-weight: bold;
@@ -22,7 +40,7 @@ body {
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-    .container {
+    article {
         max-width: 730px;
     }
 }
